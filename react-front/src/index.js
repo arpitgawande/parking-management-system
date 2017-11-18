@@ -4,4 +4,4 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import Routes from './routes';
 
-ReactDOM.render(<BrowserRouter> <Routes /> </BrowserRouter>, document.getElementById('root'))
+ReactDOM.render(<BrowserRouter><Routes /></BrowserRouter>, document.getElementById('root'))
