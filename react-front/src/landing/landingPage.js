@@ -7,10 +7,12 @@ export default class Landing extends React.Component {
         return (
             <div>
                 <div className="app-header-container">
-                    <p className="app-header-text">Rutgers University : Parking System</p>
+                    <h1 className="app-header-text">Rutgers Parking System</h1>
                 </div>
-                <Link to='/login'>Login</Link>&nbsp;
-                <Link to='/register'>Register</Link>
+                <label>Search User:</label>
+                <input type='text' placeholder='Enter User Id'/><br/>
+                <Link to='/addUser'>Add User</Link>
+                <h1>List Of Users</h1>
             </div>
         );
     }
