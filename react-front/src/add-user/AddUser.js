@@ -1,4 +1,5 @@
 import React from 'react';
+import Campus from '../common-components/campus/campus-component';
 
 export default class AddUser extends React.Component {
     render() {
@@ -20,11 +21,7 @@ export default class AddUser extends React.Component {
                 <label>Contact:</label>
                 <input type='text' name='contact'/>
                 <label>Campus:</label>
-                <select name='campuses'>
-                    <option value='camden'>Camden</option>
-                    <option value='new brunswik'>New Brunswik</option>
-                    <option value='newark'>Newark</option>
-                </select>
+                <Campus />
                 <input type='button' value='Add' onClick={() => alert("user added")}/>
             </div>
         );
