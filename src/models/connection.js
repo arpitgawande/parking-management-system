@@ -2,8 +2,8 @@ var mysql = require('mysql');
 
 const con = mysql.createConnection({
     host: "localhost",
-    user: "root",
-    password: "root",
+    user: "rutgers",
+    password: "rutgers",
     database: "rutgers_parking_system"
   });
   
