@@ -1,4 +1,4 @@
-use	rutgers_parking_system;
+use	rutgers_parking_system_2;
 
 SET SQL_SAFE_UPDATES=0; 
 delete from user_parking_type;
