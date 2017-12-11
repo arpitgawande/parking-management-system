@@ -16,14 +16,6 @@ module.exports = function() {
         userParkingTypeModel: userParkingTypeModel,
         vehicleModel: vehicleModel
     };
-
-    campusModel.setModels(models);
-    parkingLotModel.setModels(models);
-    parkingSpotModel.setModels(models);
-    permitModel.setModels(models);
-    userModel.setModels(models);
-    userParkingTypeModel.setModels(models);
-    vehicleModel.setModels(models);
     
     return models;
 };

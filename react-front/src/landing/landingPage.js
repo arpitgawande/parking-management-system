@@ -11,6 +11,7 @@ export default class Landing extends React.Component {
                 </div>
                 <label>Search User:</label>
                 <input type='text' placeholder='Enter User Id'/><br/>
+                <a href='#'>Search</a>
                 <Link to='/addUser'>Add User</Link>
                 <h1>List Of Users</h1>
             </div>

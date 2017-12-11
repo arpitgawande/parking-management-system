@@ -1,0 +1,75 @@
+{
+    "user": {
+        "name":"",
+        "address": "",
+        "type":"",
+        "campus":""
+    },
+
+    "users": [
+        {
+            "name": "Darshan",
+            "address": "136 Hemenway street",
+            "type": "Student",
+            "campus": "Camden"
+        }
+    ],
+
+    "userType": {
+        "description": "student"
+    },
+
+    "campuses": [
+        {
+            "name": "Camden"
+        }
+    ],
+
+    "vehicles": [
+        {
+            "plateNumber": "",
+            "slateNumber": "",
+            "make": "",
+            "color": "",
+            "userId": ""
+        }
+    ],
+
+    "parkingLots": [
+        {
+            "lotName": "Lot C1",
+            "totalSpots": "40"
+        }
+    ],
+
+    "parkingSpot": [
+        {
+            "occupiedFlag": "false"
+        }
+    ]
+}
+
+//FIND_USER
+//GET_USERS
+//ADD_USER
+//GET_VEHICLES
+//ADD_VEHICLE
+//EDIT_VEHICLE
+//GET_SPOT
+//GRAB_SPOT
+//CLEAR_SPOT
+
+// export function fetchPosts(subreddit) {
+  
+//     return function (dispatch) {
+//       dispatch(requestPosts(subreddit))
+  
+//       return fetch(`https://www.reddit.com/r/${subreddit}.json`)
+//         .then(
+//           response => response.json(),
+//           error => console.log('An error occurred.', error)
+//         )
+//         .then(json =>
+//           dispatch(receivePosts(subreddit, json))
+//         )
+//     }

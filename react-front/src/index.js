@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { createStore } from 'redux'
 import './index.css';
 import Routes from './routes';
 
-ReactDOM.render(<BrowserRouter><Routes /></BrowserRouter>, document.getElementById('root'))
+
+ReactDOM.render(<Routes />, document.getElementById('root'))
