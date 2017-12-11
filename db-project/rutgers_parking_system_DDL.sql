@@ -11,13 +11,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema rutgers_parking_system
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `rutgers_parking_system` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `rutgers_parking_system` ;
+CREATE SCHEMA IF NOT EXISTS `rutgers_parking_system_2` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `rutgers_parking_system_2` ;
 
 -- -----------------------------------------------------
 -- Table `rutgers_parking_system`.`user_parking_type`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rutgers_parking_system`.`user_parking_type` (
+CREATE TABLE IF NOT EXISTS `rutgers_parking_system_2`.`user_parking_type` (
   `user_type` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `description` VARCHAR(45) NULL,
   PRIMARY KEY (`user_type`),
@@ -28,7 +28,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `rutgers_parking_system`.`campus`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rutgers_parking_system`.`campus` (
+CREATE TABLE IF NOT EXISTS `rutgers_parking_system_2`.`campus` (
   `campus_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `campus_name` VARCHAR(45) NULL,
   `campus_address` VARCHAR(45) NULL,
@@ -40,10 +40,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `rutgers_parking_system`.`user`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rutgers_parking_system`.`user` (
+CREATE TABLE IF NOT EXISTS `rutgers_parking_system_2`.`user` (
   `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_name` VARCHAR(45) NULL,
-  `user_ address` VARCHAR(45) NULL,
+  `user_address` VARCHAR(45) NULL,
   `user_type` INT UNSIGNED NOT NULL,
   `campus_id` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`user_id`),
@@ -52,12 +52,12 @@ CREATE TABLE IF NOT EXISTS `rutgers_parking_system`.`user` (
   INDEX `fk_user_2_idx` (`campus_id` ASC),
   CONSTRAINT `fk_user_1`
     FOREIGN KEY (`user_type`)
-    REFERENCES `rutgers_parking_system`.`user_parking_type` (`user_type`)
+    REFERENCES `rutgers_parking_system_2`.`user_parking_type` (`user_type`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_2`
     FOREIGN KEY (`campus_id`)
-    REFERENCES `rutgers_parking_system`.`campus` (`campus_id`)
+    REFERENCES `rutgers_parking_system_2`.`campus` (`campus_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -66,7 +66,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `rutgers_parking_system`.`vehicle`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rutgers_parking_system`.`vehicle` (
+CREATE TABLE IF NOT EXISTS `rutgers_parking_system_2`.`vehicle` (
   `vehicle_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `plate_number` CHAR(10) NULL,
   `plate_state` CHAR(2) NULL,
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `rutgers_parking_system`.`vehicle` (
   UNIQUE INDEX `vehicle_id_UNIQUE` (`vehicle_id` ASC),
   CONSTRAINT `fk_vehicle_1`
     FOREIGN KEY (`user_id`)
-    REFERENCES `rutgers_parking_system`.`user` (`user_id`)
+    REFERENCES `rutgers_parking_system_2`.`user` (`user_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -88,7 +88,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `rutgers_parking_system`.`permit`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rutgers_parking_system`.`permit` (
+CREATE TABLE IF NOT EXISTS `rutgers_parking_system_2`.`permit` (
   `permit _number` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `status` TINYINT(1) NULL,
   `issue_date` DATETIME NULL,
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `rutgers_parking_system`.`permit` (
   INDEX `fk_permit_1_idx` (`user_id` ASC),
   CONSTRAINT `fk_permit_1`
     FOREIGN KEY (`user_id`)
-    REFERENCES `rutgers_parking_system`.`user` (`user_id`)
+    REFERENCES `rutgers_parking_system_2`.`user` (`user_id`)
     ON DELETE NO ACTION
     ON UPDATE RESTRICT)
 ENGINE = InnoDB;
@@ -110,7 +110,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `rutgers_parking_system`.`parking_lot`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rutgers_parking_system`.`parking_lot` (
+CREATE TABLE IF NOT EXISTS `rutgers_parking_system_2`.`parking_lot` (
   `lot_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `lot_name` VARCHAR(45) NULL,
   `lot_address` VARCHAR(45) NULL,
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `rutgers_parking_system`.`parking_lot` (
   UNIQUE INDEX `lot_id_UNIQUE` (`lot_id` ASC),
   CONSTRAINT `fk_parking_lot_1`
     FOREIGN KEY (`user_type`)
-    REFERENCES `rutgers_parking_system`.`user_parking_type` (`user_type`)
+    REFERENCES `rutgers_parking_system_2`.`user_parking_type` (`user_type`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -130,7 +130,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `rutgers_parking_system`.`parking_spot`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rutgers_parking_system`.`parking_spot` (
+CREATE TABLE IF NOT EXISTS `rutgers_parking_system_2`.`parking_spot` (
   `spot_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `lot_id` INT UNSIGNED NOT NULL,
   `occuped_flag` TINYINT(1) NULL,
@@ -142,12 +142,12 @@ CREATE TABLE IF NOT EXISTS `rutgers_parking_system`.`parking_spot` (
   UNIQUE INDEX `spot_id_UNIQUE` (`spot_id` ASC),
   CONSTRAINT `fk_parking_spot_1`
     FOREIGN KEY (`lot_id`)
-    REFERENCES `rutgers_parking_system`.`parking_lot` (`lot_id`)
+    REFERENCES `rutgers_parking_system_2`.`parking_lot` (`lot_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_parking_spot_2`
     FOREIGN KEY (`permit_number`)
-    REFERENCES `rutgers_parking_system`.`permit` (`permit _number`)
+    REFERENCES `rutgers_parking_system_2`.`permit` (`permit _number`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -156,4 +156,3 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-

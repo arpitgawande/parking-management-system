@@ -13,8 +13,8 @@ module.exports = function () {
         },
 
         findCampusIDByName: function (campusName) {
-            let sql = 'SELECT campus_id FROM campus WHERE campus_name = ?';
-            return db.query(sql, campusName)
+            let sql = 'SELECT * FROM campus WHERE campus_name = ?';
+            return db.query(sql, [campusName])
                 .then(function (result) {
                     return Promise.resolve(result);
                 }, function (err) {

@@ -5,7 +5,7 @@ class Database {
             host: "localhost",
             user: "root",
             password: "root",
-         database: "rutgers_parking_system"
+         database: "rutgers_parking_system_2"
         } );
     }
     query( sql, args ) {

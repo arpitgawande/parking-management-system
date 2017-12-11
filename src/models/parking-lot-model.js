@@ -1,19 +1,26 @@
+const Database = require('../db-connection');
+let db = new Database();
 module.exports = function(con) {
     return {
-        getParkingLotList: function() {
-            let sql = 'SELECT * FROM parking_lot';
-            con.query(sql, function(err, result, fields) {
-                if (err) Promise.reject(err);
-                Promise.resolve(result);
+        findParkingLotByUserType: function(type) {
+            let sql = 'SELECT * FROM parking_lot WHERE user_type = ?';
+            return db.query(sql, [type])
+            .then(function (result) {
+                return Promise.resolve(result);
+            }, function (err) {
+                return Promise.reject(err);
             });
         },
 
         findParkingLotByName: function(lotName) {
             let sql = 'SELECT * FROM parking_lot WHERER lot_name = ?';
-            con.query(sql, [lotName], function(err, result, fields) {
-                if (err) Promise.reject(err);
-                Promise.resolve(result);
+            return db.query(sql, [lotName])
+            .then(function (result) {
+                return Promise.resolve(result);
+            }, function (err) {
+                return Promise.reject(err);
             });
+
         }
     };
 }

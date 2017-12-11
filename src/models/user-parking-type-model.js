@@ -14,7 +14,7 @@ module.exports = function () {
 
         findUserTypeByDescription: function (description) {
             let sql = 'SELECT * FROM user_parking_type WHERE description = ?';
-            return db.query(sql)
+            return db.query(sql, [description])
                 .then(function (result) {
                     return Promise.resolve(result);
                 }, function (err) {

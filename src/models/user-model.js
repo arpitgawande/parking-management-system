@@ -1,26 +1,34 @@
+const Database = require('../db-connection');
+let db = new Database();
 module.exports = function(con) {
     return {
         getUserList: function() {
             let sql = 'SELECT * FROM user';
-            con.query(sql, function(err, result, fields) {
-                if (err) return Promise.reject(err);
+            return db.query(sql)
+            .then(function (result) {
                 return Promise.resolve(result);
+            }, function (err) {
+                return Promise.reject(err);
             });
         },
 
         findUserById: function(userId) {
             let sql = 'SELECT * FROM user WHERE user_id = ?';
-            con.query(sql, [userId], function(err, result, fields) {
-                if (err) return Promise.reject(err);
+            return db.query(sql, [userId])
+            .then(function (result) {
                 return Promise.resolve(result);
+            }, function (err) {
+                return Promise.reject(err);
             });
         },
 
         addUser: function(user) {
-            let sql = 'INSERT INTO user (user_name, user_ address, user_type, campus_id) VALUES ?';
-            con.query(sql, [user.name, user.address, user.type, user.campusId], function(err, result, fields) {
-                if (err) return Promise.reject(err);
+            let sql = 'INSERT INTO user SET user_name = ?, user_address = ?, user_type = ?, campus_id = ?';
+            return db.query(sql, [user.name, user.address, user.type, user.campusId])
+            .then(function (result) {
                 return Promise.resolve(result);
+            }, function (err) {
+                return Promise.reject(err);
             });
         }
     };
