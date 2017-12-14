@@ -1,5 +1,25 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  }
+
+.center {
+    margin: auto;
+    width: 80%;
+    padding: 10px;
+}
+
+.content {
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    padding: 10px;
+}
+
+.add-margin{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
 }

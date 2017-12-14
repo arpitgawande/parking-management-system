@@ -9,7 +9,8 @@ export default class Landing extends React.Component {
         this.baseURL = 'http://localhost:3000/';
         this.handleInputChange = this.handleInputChange.bind(this);
         this.state = {
-            users: []
+            users: [],
+            currentUserId: null
         }
     }
 
@@ -38,6 +39,32 @@ export default class Landing extends React.Component {
             err => { console.log("error") });
     }
 
+    buyPermit(userId){
+        let user = {};
+        user.id = userId;
+        let url = this.baseURL + 'buyPermit';
+        return fetch(url,{
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+            method: 'POST',
+            body: JSON.stringify(user)
+        }).then(response => { return Promise.resolve(console.log(response.json())) },
+            err => { console.log("error") });
+    }
+
+    updatePrmit(userId){
+      console.log('userId', userId)
+      //let userId = e.target.id;
+      //this.setState({ currentUserId: userId })
+      this.buyPermit(userId)
+      .then(response => {
+        console.log(response);
+        this.getUserData()
+      });
+    }
+
     getAllUsers() {
         this.findAllUsers().then(response => {
             this.setState({ users: response });
@@ -52,43 +79,65 @@ export default class Landing extends React.Component {
 
     getUserData() {
         let items = [];
-        for (var i = 0; i < this.state.users.length; i++) {
-            let userId = this.state.users[i].user_id;
-            items.push(<tr>
-                <td>{this.state.users[i].user_name}</td>
-                <td>{this.state.users[i].user_address}</td>
-                <td><Link to={`vehicle/${userId}`}>Add Vehicle</Link></td>
-                <td><Link to={`grabSpot/${userId}`}>Grab Spot</Link></td>
-            </tr>);
+        if(this.state.users){
+          for (var i = 0; i < this.state.users.length; i++) {
+              let user = this.state.users[i];
+              if(user.permit_number){
+                items.push(<tr>
+                  <td>{user.user_name}</td>
+                  <td>{user.user_address}</td>
+                  <td><Link to={`vehicle/${user.user_id}`}>Add/View Vehicle</Link></td>
+                  <td>{user.permit_number}</td>
+                  <td><Link to={`grabSpot/${user.user_id}`}>Grab Spot</Link></td>
+               </tr>);
+              } else{
+                items.push(<tr>
+                  <td>{user.user_name}</td>
+                  <td>{user.user_address}</td>
+                  <td><Link to={`vehicle/${user.user_id}`}>Add/View Vehicle</Link></td>
+                  <input className="btn btn-secondary btn-sm add-margin" type='button' id={user.user_id} value='Buy Permit' onClick={this.updatePrmit.bind(this, user.user_id)} />
+                  <td></td>
+                </tr>);
+              }
+          }
         }
         return items;
     }
 
     render() {
         return (
-            <div class='form'>
-                <div className="app-header-container">
+            <div className='form'>
+                <div className="app-header-container jambotron center">
                     <h1 className="app-header-text">Rutgers Parking System</h1>
                 </div>
+                <div className='center'>
                 <label>Search User:</label>
-                <input class='input textbox' type='text'
+                <input className='input textbox' type='text'
                     placeholder='Enter User Id'
                     name='firstName'
                     value={this.state.userId}
                     onChange={this.handleInputChange} /><br />
-                <input type='button' value='Search' onClick={() => { this.getUser() }} />
-                <input type='button' value='All users' onClick={() => { this.getAllUsers() }} />
+                <input className="btn btn-secondary btn-sm add-margin" type='button' value='Search' onClick={() => { this.getUser() }} />
+                <input className="btn btn-secondary btn-sm" type='button' value='All users' onClick={() => { this.getAllUsers() }} />
+                <div>
                 <Link to='/addUser'>Add User</Link>
-                <h1>List Of Users</h1>
-                <table class="pure-table pure-table-horizontal">
+                </div>
+                <h2>List Of Existing Users</h2>
+                <table className="pure-table pure-table-horizontal">
+                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Address</th>
-                        <th>Add Vehicle</th>
+                        <th>Add/View Vehicle</th>
+                        <th>Permit Number</th>
                         <th>Grab Spot</th>
                     </tr>
+                   </thead>
+                   <tbody>
                     {this.getUserData()}
+                   </tbody>
                 </table>
+                </div>
             </div>
         );
     }

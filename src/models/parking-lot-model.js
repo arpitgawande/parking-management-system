@@ -20,6 +20,16 @@ module.exports = function(con) {
             }, function (err) {
                 return Promise.reject(err);
             });
+        },
+
+        findParkingLots: function(campusId) {
+            let sql = 'SELECT * FROM parking_lot WHERE campus_id = ?';
+            return db.query(sql, [parseInt(campusId)])
+            .then(function (result) {
+                return Promise.resolve(result);
+            }, function (err) {
+                return Promise.reject(err);
+            });
 
         }
     };

@@ -152,13 +152,6 @@ CREATE TABLE IF NOT EXISTS `rutgers_parking_system`.`parking_spot` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-------------------------
--- View
-------------------
-CREATE VIEW user_with_permit AS (
-SELECT U.user_id, user_name, user_address, user_type, campus_id, P.permit_number 
-FROM user U LEFT JOIN permit P ON P.user_id=U.user_id);
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

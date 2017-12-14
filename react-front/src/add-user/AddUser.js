@@ -44,16 +44,20 @@ export default class AddUser extends React.Component {
 
     createUserTypeSelectItems() {
         let items = [];
-        for (var i = 0; i < this.state.userTypeList.length; i++) {
-            items.push(<option value={this.state.userTypeList[i].description}>{this.state.userTypeList[i].description}</option>);
+        if(this.state.userTypeList){
+          for (var i = 0; i < this.state.userTypeList.length; i++) {
+              items.push(<option value={this.state.userTypeList[i].description}>{this.state.userTypeList[i].description}</option>);
+          }
         }
         return items;
     }
 
     createCampusSelectItems() {
         let items = [];
-        for (var i = 0; i < this.state.campuses.length; i++) {
-            items.push(<option value={this.state.campuses[i].campus_name}>{this.state.campuses[i].campus_name}</option>);
+        if(this.state.campuses){
+          for (var i = 0; i < this.state.campuses.length; i++) {
+              items.push(<option value={this.state.campuses[i].campus_name}>{this.state.campuses[i].campus_name}</option>);
+          }
         }
         return items;
     }
@@ -85,24 +89,24 @@ export default class AddUser extends React.Component {
 
     render() {
         return (
-            <div class='form'>
+            <div className='form center'>
                 <h1>Add User</h1>
                 <label>First Name:</label>
-                <input class='input textbox' type='text' name='firstName' value={this.state.firstName} onChange={this.handleInputChange} />
+                <input className='input textbox' type='text' name='firstName' value={this.state.firstName} onChange={this.handleInputChange} />
                 <label>Last Name:</label>
-                <input class='input textbox' type='text' name='lastName' value={this.state.lastName} onChange={this.handleInputChange} />
+                <input className='input textbox' type='text' name='lastName' value={this.state.lastName} onChange={this.handleInputChange} />
                 <label>Address:</label>
-                <input class='input textbox' type='text' name='address' value={this.state.address} onChange={this.handleInputChange} />
+                <input className='input textbox' type='text' name='address' value={this.state.address} onChange={this.handleInputChange} />
                 <label>User Type:</label>
                 <select name='userType' value={this.state.userType} onChange={this.handleInputChange}>
                     {this.createUserTypeSelectItems()}
                 </select>
                 <label>Campus:</label>
-                <select name='campus' value={this.state.campus} onChange={this.handleInputChange}>
+                <select className="add-margin" name='campus' value={this.state.campus} onChange={this.handleInputChange}>
                     {this.createCampusSelectItems()}
                 </select>
-                <input type='button' value='Add' onClick={() => { this.addUser() }} />
-                <Link to='/'>List of Users</Link>
+                <input className="add-margin" type='button' value='Add' onClick={() => { this.addUser() }} />
+                <Link className="add-margin"  to='/'>List of Users</Link>
             </div>
         );
     }

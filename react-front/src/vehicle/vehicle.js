@@ -37,7 +37,7 @@ export default class Vehicle extends React.Component {
     getVehicleData() {
         let items = [];
         for (var i = 0; i < this.state.vehicles.length; i++) {
-            items.push(<tr>
+            items.push(<tr className="add-margin" key={i}>
                 <td>{this.state.vehicles[i].plate_number}</td>
                 <td>{this.state.vehicles[i].plate_state}</td>
                 <td>{this.state.vehicles[i].make}</td>
@@ -69,9 +69,10 @@ export default class Vehicle extends React.Component {
 
     render() {
         return(
-            <div class='form'>
+            <div className='form center'>
                 <h1>Vehicle List</h1>
-                <table class="pure-table pure-table-horizontal">
+                <table className="pure-table pure-table-horizontal add-margin">
+                  <thead>
                     <tr>
                         <th>Plate Number</th>
                         <th>Plate Slate</th>
@@ -79,21 +80,36 @@ export default class Vehicle extends React.Component {
                         <th>Model</th>
                         <th>Color</th>
                     </tr>
+                </thead>
+                <tbody className="add-margin">
                 {this.getVehicleData()}
+                </tbody>
                 </table>
                 <h1>Add Vehicle</h1>
+                <div>
                 <label>Plate Number:</label>
-                <input class='input textbox' type='text' name='plateNumber' value={this.state.firstName} onChange={this.handleInputChange}/>
+                <input className='input textbox' type='text' name='plateNumber' value={this.state.firstName} onChange={this.handleInputChange}/>
+                </div>
+                <div>
                 <label>Plate Slate:</label>
-                <input class='input textbox' type='text' name='plateSlate'value={this.state.firstName} onChange={this.handleInputChange}/>
+                <input className='input textbox' type='text' name='plateSlate'value={this.state.firstName} onChange={this.handleInputChange}/>
+                </div>
+                <div>
                 <label>Make:</label>
-                <input class='input textbox' type='text' name='make'value={this.state.firstName} onChange={this.handleInputChange}/>
+                <input className='input textbox' type='text' name='make'value={this.state.firstName} onChange={this.handleInputChange}/>
+                </div>
+                <div>
                 <label>Model:</label>
-                <input class='input textbox' type='text' name='model'value={this.state.firstName} onChange={this.handleInputChange}/>
+                <input className='input textbox' type='text' name='model'value={this.state.firstName} onChange={this.handleInputChange}/>
+                </div>
+                <div>
                 <label>Color:</label>
-                <input class='input textbox' type='text' name='color' value={this.state.firstName} onChange={this.handleInputChange}/>
+                <input className='input textbox' type='text' name='color' value={this.state.firstName} onChange={this.handleInputChange}/>
+                </div>
+                <div>
                 <input type='button' value='Add' onClick={() => { this.addVehicle() }}/>
                 <Link to='/'>List of Users</Link>
+                </div>
             </div>
         );
     }

@@ -3,9 +3,9 @@ class Database {
     constructor() {
         this.connection = mysql.createConnection( {
             host: "localhost",
-            user: "root",
-            password: "root",
-         database: "rutgers_parking_system_2"
+            user: "rutgers",
+            password: "rutgers",
+         database: "rutgers_parking_system"
         } );
     }
     query( sql, args ) {

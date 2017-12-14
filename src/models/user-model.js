@@ -3,7 +3,7 @@ let db = new Database();
 module.exports = function(con) {
     return {
         getUserList: function() {
-            let sql = 'SELECT * FROM user';
+            let sql = 'SELECT * FROM user_with_permit';
             return db.query(sql)
             .then(function (result) {
                 return Promise.resolve(result);
@@ -13,7 +13,7 @@ module.exports = function(con) {
         },
 
         findUserById: function(userId) {
-            let sql = 'SELECT * FROM user WHERE user_id = ?';
+            let sql = 'SELECT * FROM user_with_permit WHERE user_id = ?';
             return db.query(sql, [userId])
             .then(function (result) {
                 return Promise.resolve(result);
