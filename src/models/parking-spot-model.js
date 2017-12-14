@@ -35,6 +35,7 @@ module.exports = function(con) {
       },
 
       bookSpot: function(userId, lotId, spotId) {
+        console.log('userId, lotId, spotId',userId, lotId, spotId)
           let selectPermitSql = 'SELECT * FROM permit WHERE user_id = ?';
           return db.query(selectPermitSql, [userId])
           .then(function (user) {
@@ -49,6 +50,7 @@ module.exports = function(con) {
                     let insertSql = 'INSERT INTO permit SET permit_number =? WHERE lot_id = ? AND spot_id = ?';
                     return db.query(sql, [user.permit_number, lotId, spotId])
                     .then(function (result) {
+                      console.log('permit insert result', result);
                         return Promise.resolve(result);
                     }, function (err) {
                         return Promise.reject(err);

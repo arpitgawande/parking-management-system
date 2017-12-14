@@ -8,6 +8,7 @@ module.exports = function(app, models) {
     }
 
     function getSpot(req, res) {
+      console.log('getSpot',req.query);
         models.parkingSpotModel.bookSpot(req.query.userId, req.query.lotId, req.query.spotId)
         .then(response => res.json(response), err => res.send(err));
     }

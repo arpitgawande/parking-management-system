@@ -66,21 +66,20 @@ export default class GrabSpot extends React.Component {
     }
 
     getSpot(spotId){
-      let value = ReactDOM.findDOMNode(this).value;
-      //this.someOtherFunction(name);
-      console.log('getSpot',value)
       let userId = this.props.match.params.id;
       let lotId = this.state.parkingLot.id;
-      //let spotId = this.value;
+      console.log('spotId, lotId, userId',spotId, lotId, userId);
       const url = this.baseURL + 'getSpot?userId=' + userId+'&lotId=' + lotId+'&spotId=' + spotId;
       return fetch(url)
-      .then(response => {
-              console.log(response)
-              if(response === 0){
-                var name = React.findDOMNode(this).value;
-                this.someOtherFunction(name);
-              }
-          },
+      .then(response => {Promise.resolve(response.json())
+        .then(value => { //Server send promise we need to resolve it
+          console.log('Server Response for getSpot is:', value)
+          if(value = 1){
+
+          }else{
+
+          }
+      }) },
       err => { console.log("error") });
     }
 
@@ -141,8 +140,9 @@ export default class GrabSpot extends React.Component {
         for(var i=0; i <= this.state.parkingSpots.length; i++) {
                 //console.log(this.state.parkingSpots[i]);
                 if(this.state.parkingSpots[i]){
+                let spotId = this.state.parkingSpots[i].spot_id
                 items.push(<div className="grid-item"><input className={this.state.className} type='button'
-                value={this.state.parkingSpots[i].spot_id} onClick={() => {this.getSpot()}}/></div>);
+                value={spotId} onClick={this.getSpot.bind(this, spotId)}/></div>);
                 }
           }
       }
@@ -154,10 +154,12 @@ export default class GrabSpot extends React.Component {
             <div className='form center'>
                 <h1>Grab Spot</h1>
                 <label>Campus:</label>
-                <select className="add-margin" name='campus' value={this.state.campus.name} onChange={this.handleInputChange}>
+                <select className="add-margin" name='campus' value={this.state.campus.name}
+                onChange={this.handleInputChange}>
                     {this.createCampusSelectItems()}
                 </select>
-                <select className="add-margin" name='selectedParkingLot' value={this.state.parkingLot.name} onChange={this.handleInputChange}>
+                <select className="add-margin" name='selectedParkingLot' value={this.state.parkingLot.name}
+                onChange={this.handleInputChange}>
                     {this.createParkingLotSelectItems()}
                 </select>
 
